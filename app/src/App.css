@@ -1,0 +1,134 @@
+#root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+.logo {
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
+}
+.logo:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+    filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    a:nth-of-type(2) .logo {
+        animation: logo-spin infinite 20s linear;
+    }
+}
+
+body {
+    place-items: normal !important;
+}
+
+li {
+    text-align: left;
+}
+
+button {
+    background: #ddd !important;
+}
+
+h1.header {
+    color: black !important;
+    cursor: pointer;
+    position: relative;
+}
+
+.outer-image-box {
+    max-width: 100%;
+    height: 100%;
+}
+
+.image-box {
+    max-width: 400px;
+    padding: 10px;
+    display: inline-block;
+}
+
+.image-box p {
+    max-width: 400px;
+    padding: 0 10px 15px;
+    margin: 10px 0;
+    text-align: left;
+    display: flex;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+.big-image {
+    width: 100%;
+}
+
+.image-popup .close-popup {
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    padding: 4px 8px 8px;
+    line-height: 20px;
+    right: -14px;
+    top: -14px;
+    font-size: 26px;
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid #cfcece;
+}
+.popup-content {
+    padding-bottom: 0 !important;
+    max-width: 650px;
+}
+
+a.link-color {
+    color: black;
+}
+
+.notVisible {
+    display: none;
+}
+
+.visible {
+    display: block !important;
+}
+
+@media screen and (max-width: 1300px) {
+    .popup-content {
+        width: 60% !important;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .image-box {
+        padding: 10px 0;
+    }
+
+    .popup-content {
+        width: 75% !important;
+    }
+}
+
+@media screen and (max-width: 710px) {
+    .popup-content {
+        margin: auto 15px !important;
+        width: 100% !important;
+    }
+}
