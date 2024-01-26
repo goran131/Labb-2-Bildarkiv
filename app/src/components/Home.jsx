@@ -1,42 +1,26 @@
-import { Link, useLocation } from 'react-router-dom'
-import PropTypes from 'prop-types'
+import { useContext } from 'react'
+import { Link } from 'react-router-dom'
+import BackgroundColor from './BackgroundColor.jsx'
 
-function Home(props) {
-    const location = useLocation()
-    const groupsState = location.state
-    let imagegroups = []
-
-    if (groupsState != null && props.imagegroups.length != groupsState.length) {
-        imagegroups = groupsState
-    } else {
-        imagegroups = props.imagegroups
-    }
-
+function Home() {
     return (
         <>
+            <Link to="/">
+                <h1 className="header">Bildarkiv</h1>
+            </Link>
+
             <div>
-                <Link to="/" state={imagegroups}>
-                    <h1 className="header">Bildarkiv</h1>
+                <p>Här kan du lägga upp dina bilder grupperade i grupper</p>
+                <br />
+
+                <Link className="link-color" to="/components/LayoutPage">
+                    <button>Visa bildarkiv</button>
                 </Link>
 
-                <div>
-                    <p>Här kan du lägga upp dina bilder grupperade i grupper</p>
-                    <br />
-                    <button>
-                        <Link
-                            className="link-color"
-                            to="/components/LayoutPage"
-                            state={imagegroups}
-                        >
-                            Visa bildarkiv
-                        </Link>
-                    </button>
-                </div>
+                <BackgroundColor />
             </div>
         </>
     )
 }
-
-Home.propTypes = { imagegroups: PropTypes.array }
 
 export default Home

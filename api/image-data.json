@@ -1,91 +1,91 @@
 {
-  "groups": [
-    {
-      "id": "0",
-      "name": "Familj",
-      "description": "Mina familjemedlemmar",
-      "images": [
+    "groups": [
         {
-          "id": 0,
-          "imageUrl": "/images/kalle.jpg",
-          "imageDescription": "Jag Kalle"
+            "id": "0",
+            "name": "Familj",
+            "description": "Mina familjemedlemmar",
+            "images": [
+                {
+                    "id": 0,
+                    "imageUrl": "/images/kalle.jpg",
+                    "imageDescription": "Jag Kalle"
+                },
+                {
+                    "id": 1,
+                    "imageUrl": "/images/father.jpg",
+                    "imageDescription": "Min far"
+                },
+                {
+                    "id": 2,
+                    "imageUrl": "/images/mother.jpg",
+                    "imageDescription": "Min mor"
+                },
+                {
+                    "id": 3,
+                    "imageUrl": "/images/brother.jpg",
+                    "imageDescription": "Min bror"
+                },
+                {
+                    "id": 4,
+                    "imageUrl": "/images/sister.jpg",
+                    "imageDescription": "Min syster"
+                },
+                {
+                    "id": 5,
+                    "imageUrl": "/images/sister-daughter.jpg",
+                    "imageDescription": "Min systerdotter"
+                }
+            ]
         },
         {
-          "id": 1,
-          "imageUrl": "/images/father.jpg",
-          "imageDescription": "Min far"
+            "id": "1",
+            "name": "Mina bilar",
+            "description": "Mina bilar",
+            "images": [
+                {
+                    "id": 0,
+                    "imageUrl": "/images/austin-mini-cooper-970s.webp",
+                    "imageDescription": "Min första bil var en Austin Mini Cooper 970S från 1965."
+                },
+                {
+                    "id": 1,
+                    "imageUrl": "/images/ferrari-308-gts.webp",
+                    "imageDescription": "Min andra bil var en Ferrari 308 GTS QV från 1984. Gissa vem som har kört den innan."
+                },
+                {
+                    "id": 2,
+                    "imageUrl": "/images/mercedes-amg-gt.jpg",
+                    "imageDescription": "Min tredje bil en Mercedes-AMG GT Coupé från 2023."
+                }
+            ]
         },
         {
-          "id": 2,
-          "imageUrl": "/images/mother.jpg",
-          "imageDescription": "Min mor"
-        },
-        {
-          "id": 3,
-          "imageUrl": "/images/brother.jpg",
-          "imageDescription": "Min bror"
-        },
-        {
-          "id": 4,
-          "imageUrl": "/images/sister.jpg",
-          "imageDescription": "Min syster"
-        },
-        {
-          "id": 5,
-          "imageUrl": "/images/sister-daughter.jpg",
-          "imageDescription": "Min systerdotter"
+            "id": "2",
+            "name": "Paris 2016",
+            "description": "Semesterresa till Paris år 2016",
+            "images": [
+                {
+                    "id": 0,
+                    "imageUrl": "/images/eiffeltornet-2.jpg",
+                    "imageDescription": "Jag framför Eiffeltornet"
+                },
+                {
+                    "id": 1,
+                    "imageUrl": "/images/triumfbågen-paris.jpg",
+                    "imageDescription": "Jag framför Triumfbågen"
+                },
+                {
+                    "id": 2,
+                    "imageUrl": "/images/versailles.jpg",
+                    "imageDescription": "Pappa och jag framför Versailles"
+                }
+            ]
         }
-      ]
-    },
-    {
-      "id": "1",
-      "name": "Mina bilar",
-      "description": "Mina bilar",
-      "images": [
+    ],
+    "backgroundColor": [
         {
-          "id": 0,
-          "imageUrl": "/images/austin-mini-cooper-970s.webp",
-          "imageDescription": "Min första bil var en Austin Mini Cooper 970S från 1965."
-        },
-        {
-          "id": 1,
-          "imageUrl": "/images/ferrari-308-gts.webp",
-          "imageDescription": "Min andra bil var en Ferrari 308 GTS QV från 1984. Gissa vem som har kört den innan."
-        },
-        {
-          "id": 2,
-          "imageUrl": "/images/mercedes-amg-gt.jpg",
-          "imageDescription": "Min tredje bil en Mercedes-AMG GT Coupé från 2023."
+            "id": 0,
+            "bgColor": "white"
         }
-      ]
-    },
-    {
-      "id": "2",
-      "name": "Paris 2016",
-      "description": "Semesterresa till Paris år 2016",
-      "images": [
-        {
-          "id": 0,
-          "imageUrl": "/images/eiffeltornet-2.jpg",
-          "imageDescription": "Jag framför Eiffeltornet"
-        },
-        {
-          "id": 1,
-          "imageUrl": "/images/triumfbågen-paris.jpg",
-          "imageDescription": "Jag framför Triumfbågen"
-        },
-        {
-          "id": 2,
-          "imageUrl": "/images/versailles.jpg",
-          "imageDescription": "Pappa och jag framför Versailles"
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "name": "Göran",
-      "description": "Görans grupp",
-      "images": []
-    }
-  ]
+    ]
 }

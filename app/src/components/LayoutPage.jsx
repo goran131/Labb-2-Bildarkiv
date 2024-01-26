@@ -1,23 +1,25 @@
 import { Link, useLocation } from 'react-router-dom'
+import { useContext } from 'react'
+import { ImagegroupsContext } from './Context'
 
 const LayoutPage = () => {
-    const location = useLocation()
-    const imagegroups = location.state
+    const value = useContext(ImagegroupsContext)
+
     const groupPageUrl = '/components/ImageGroupPage/'
 
     return (
         <>
-            <Link to="/" state={imagegroups}>
+            <Link to="/" state={value.imagegroups}>
                 <h1 className="header">Bildarkiv</h1>
             </Link>
 
             <div>
                 <ul>
-                    {imagegroups.map((group) => (
+                    {value.imagegroups.map((group) => (
                         <li key={group.id}>
                             <Link
                                 to={groupPageUrl + group.id}
-                                state={imagegroups}
+                                state={value.imagegroups}
                             >
                                 {group.name}
                             </Link>
@@ -26,15 +28,9 @@ const LayoutPage = () => {
                 </ul>
             </div>
 
-            <button>
-                <Link
-                    className="link-color"
-                    to="/components/NewGroupPage"
-                    state={imagegroups}
-                >
-                    Skapa ny bildgrupp
-                </Link>
-            </button>
+            <Link className="link-color" to="/components/NewGroupPage">
+                <button>Skapa ny bildgrupp</button>
+            </Link>
         </>
     )
 }

@@ -1,120 +1,105 @@
-import { Link, useLocation } from 'react-router-dom'
-import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useContext, useRef } from 'react'
 import css from './newgrouppage.module.css'
+import { ImagegroupsContext } from './Context'
 
 const NewGroupPage = () => {
-    const location = useLocation()
-    const groups = location.state
+    const contextValue = useContext(ImagegroupsContext)
+    const imagegroups = contextValue.imagegroups
 
-    let [imagegroups, setImagegroups] = useState(groups)
+    const submitButton = useRef(null)
+    const resetButton = useRef(null)
+    const groupName = useRef(null)
+    const groupDescription = useRef(null)
+    const imageDescription = useRef(null)
+    const imageFile = useRef(null)
 
     const CreateNewGroup = (event) => {
         event.preventDefault()
         let groupID = imagegroups.length
         let groupName = event.target.groupName.value
         let groupDescription = event.target.description.value
-        let newImagegroup = {
+        let images = [
+            {
+                id: 0,
+                imageUrl: URL.createObjectURL(event.target.imageFile.files[0]),
+                imageDescription: event.target.imageDescription.value
+            }
+        ]
+
+        let imagegroup = {
             id: groupID,
             name: groupName,
             description: groupDescription,
-            images: []
+            images: images
         }
 
-        let newImagegroups = [...imagegroups, newImagegroup]
+        let newImagegroups = [...imagegroups, imagegroup]
 
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newImagegroup)
+            body: JSON.stringify(imagegroup)
         }
 
         fetch('http://localhost:5030/groups', requestOptions).then(
             (response) => {
                 if (response.ok) {
                     alert('Ny grupp sparad')
-                    setImagegroups(newImagegroups)
+                    contextValue.setImagegroups(newImagegroups)
+                    resetButton.current.style.display = 'inline'
+                    submitButton.current.disabled = true
                 } else {
                     console.error('Något gick fel vid spara grupp')
                 }
             }
         )
-
-        document.querySelector('#uploadForm').classList.remove('notVisible')
-        document.querySelector('#uploadForm').classList.add('visible')
+        // uploadImage() fungerar inte. Vilket innebär att bilden bara finns kvar i denna sessionen
+        // uploadImage(event.target.imageFile.files[0])
     }
 
-    const saveImage = (event) => {
-        event.preventDefault()
-        let groupID = imagegroups.length - 1
-        let imageUrl = URL.createObjectURL(event.target.imageFile.files[0])
-        let imageDescription = event.target.imageDescription.value
+    const resetPage = () => {
+        // location.reload() går inte att använda eftersom bilden från förra gruppen försvinner
+        // Nollställer elementen manuellt istället
+        groupName.current.value = ''
+        groupDescription.current.value = ''
+        imageDescription.current.value = ''
+        imageFile.current.value = ''
+        resetButton.current.style.display = 'none'
+        submitButton.current.disabled = false
+    }
 
-        let imagegroup = imagegroups.slice(groupID)
-        imagegroup = imagegroup[0]
-        imagegroup.images = {
-            id: 0,
-            imageUrl: imageUrl,
-            imageDescription: imageDescription
-        }
+    /**
+    const uploadImage = async (imageFile) => {
+        const formData = new FormData()
+        formData.append('file', imageFile)
 
-        let newImagegroups = imagegroups
-        newImagegroups.splice(groupID, 1, imagegroup)
-
-        const requestOptions = {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(imagegroup)
-        }
-
-        fetch(
-            'http://localhost:5030/groups?id=' + groupID,
-            requestOptions
-        ).then((response) => {
-            if (response.ok) {
-                alert('Ny bild sparad')
-                setImagegroups(newImagegroups)
-            } else {
-                console.error('Något gick fel vid spara bild')
-            }
-        })
-
-        /**
-        const deleteOptions = { method: 'DELETE' }
-
-        fetch('http://localhost:5030/groups?id=' + groupID, deleteOptions).
-            then(() => {
-                const requestOptions = {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(newImagegroups)
-                }
-
-                fetch('http://localhost:5030/groups', requestOptions).then(
-                    (response) => {
-                        if (response.ok) {
-                            alert('Ny bild sparad')
-                            setImagegroups(newImagegroups)
-                        } else {
-                            console.error('Något gick fel vid spara bild')
-                        }
-                    }
-                )
+        try {
+            const result = await fetch('../public/images', {
+                method: 'POST',
+                body: formData
             })
-        */
+
+            await result.json()
+        } catch (error) {
+            console.error(error)
+        }
     }
+    */
 
     return (
         <>
-            <Link to="/" state={imagegroups}>
+            <Link to="/">
                 <h1 className="header">Bildarkiv</h1>
             </Link>
-            <h3>Ny bildgrupp</h3>
 
-            <div>
-                <form onSubmit={CreateNewGroup}>
+            <form onSubmit={CreateNewGroup}>
+                <div className={css.groupSectionBox}>
+                    <h2>Ny bildgrupp</h2>
                     <div>
                         <label>Gruppnamn</label>
                         <input
+                            ref={groupName}
                             type="text"
                             name="groupName"
                             className={css.textInput}
@@ -123,42 +108,54 @@ const NewGroupPage = () => {
                     <div>
                         <label>Beskrivning </label>
                         <input
+                            ref={groupDescription}
                             type="text"
                             name="description"
                             className={css.textInput}
                         ></input>
                     </div>
-                    <br />
-                    <button type="submit">Spara bildgrupp</button>
-                </form>
+                </div>
 
-                <form
-                    id="uploadForm"
-                    onSubmit={saveImage}
-                    className="notVisible"
-                >
-                    <br />
-                    <br />
-                    <h3>Ladda upp bilder</h3>
+                <div className={css.imageSectionBox}>
+                    <h4>Ladda upp bild</h4>
+
                     <div>
                         <label>Beskrivning:</label>
                         <input
+                            ref={imageDescription}
                             type="text"
                             name="imageDescription"
                             className={css.textInput}
                         ></input>
-                        <div></div>
-                        <input type="file" name="imageFile"></input>
                     </div>
+                    <div>
+                        <input
+                            ref={imageFile}
+                            type="file"
+                            name="imageFile"
+                        ></input>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" ref={submitButton}>
+                        Spara bildgrupp
+                    </button>
                     <br />
-                    <button type="submit">Spara bild</button>
-                </form>
-            </div>
+                    <br />
+                    <button
+                        ref={resetButton}
+                        type="button"
+                        onClick={resetPage}
+                        className="notVisible"
+                    >
+                        Skapa fler bildgrupper
+                    </button>
+                </div>
+            </form>
+
             <br />
             <div>
-                <Link to="/components/LayoutPage" state={imagegroups}>
-                    Tillbaka
-                </Link>
+                <Link to="/components/LayoutPage">Tillbaka</Link>
             </div>
         </>
     )
